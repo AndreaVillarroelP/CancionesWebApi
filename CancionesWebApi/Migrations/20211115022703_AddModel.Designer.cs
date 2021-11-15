@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CancionesWebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211013010625_AddModel")]
+    [Migration("20211115022703_AddModel")]
     partial class AddModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,8 @@ namespace CancionesWebApi.Migrations
 
                     b.Property<string>("Autor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Enlace")
                         .HasMaxLength(100)

@@ -25,7 +25,8 @@ namespace CancionesWebApi.Migrations
 
                     b.Property<string>("Autor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Enlace")
                         .HasMaxLength(100)
