@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CancionesWebApi.Data;
 using CancionesWebApi.Models;
+using CancionesWebApi.Helpers;
 
 namespace CancionesWebApi.Controllers
 {
@@ -23,6 +24,7 @@ namespace CancionesWebApi.Controllers
 
         // GET: api/Cancions
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Cancion>>> GetCancion()
         {
             return await _context.Cancion.ToListAsync();

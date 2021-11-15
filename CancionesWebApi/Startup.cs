@@ -1,4 +1,6 @@
 using CancionesWebApi.Data;
+using CancionesWebApi.Helpers;
+using CancionesWebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,11 @@ namespace CancionesWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //configure strongly typed settings object
+            services.Configure<AppSettings>
+            (Configuration.GetSection("AppSettings"));
+            // configure DI for application
+            services.AddScoped<IUserService, UserService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -53,6 +60,7 @@ namespace CancionesWebApi
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
